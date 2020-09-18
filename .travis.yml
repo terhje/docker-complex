@@ -22,3 +22,4 @@ after_success:
   - docker push terhje/multi-nginx
   - docker push terhje/multi-server
   - docker push terhje/multi-worker
+  
