@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t terhje/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run terhje/react-test npm test -- --coverage
+
+
+after_success:
+  - docker build terhje/multi-client ./client
+  - docker build terhje/multi-nginx ./nginx
+  - docker build terhje/multi-server ./server
+  - docker build terhje/multi-worker ./worker
+
+  # Log into the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+  # Take those iamges and push them to docker hub
+  - docker push terhje/multi-client
+  - docker push terhje/multi-nginx
+  - docker push terhje/multi-server
+  - docker push terhje/multi-worker
