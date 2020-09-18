@@ -12,10 +12,10 @@ script:
 
 
 after_success:
-  - docker build -b terhje/multi-nginx ./nginx
-  - docker build -b terhje/multi-client ./client
-  - docker build -b terhje/multi-server ./server
-  - docker build -b terhje/multi-worker ./worker
+  - docker build -t terhje/multi-nginx ./nginx
+  - docker build -t terhje/multi-client ./client
+  - docker build -t terhje/multi-server ./server
+  - docker build -t terhje/multi-worker ./worker
 
   # Log into the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
