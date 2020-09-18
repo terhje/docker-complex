@@ -16,7 +16,7 @@ after_success:
   - docker build -b terhje/multi-worker ./worker
 
   # Log into the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those iamges and push them to docker hub
   - docker push terhje/multi-client
   - docker push terhje/multi-nginx
